@@ -250,6 +250,30 @@ class Marauder:
         text = self.capture("list -a", settle=2.5)
         return self.parse_aps(text)
 
+    def scan_full(self, seconds=20, clear=True):
+        """Like scan_aps() but also fills in BSSIDs.
+
+        `list -a` gives index/channel/essid/rssi but no BSSID; the streaming
+        `scanap` output has RSSI/Ch/BSSID/ESSID. We capture the stream during the
+        scan, then correlate it onto the indexed list by (essid, channel). APs
+        with no raw match keep bssid="".
+        """
+        self.stop()
+        if clear:
+            self.clear_aps()
+        self.drain()
+        self.send("scanap")
+        time.sleep(seconds)
+        self.stop()
+        raws = self.parse_raw_scan(self.snapshot())
+        aps = self.parse_aps(self.capture("list -a", settle=2.5))
+        for ap in aps:
+            for r in raws:
+                if r.essid == ap.essid and r.channel == ap.channel:
+                    ap.bssid = r.bssid
+                    break
+        return aps
+
     def scan_stations(self, ap_seconds=15, sta_seconds=20):
         """scanap (needed first) then scansta, then parse `list -c`."""
         self.stop()
@@ -295,9 +319,15 @@ class Marauder:
         return stations
 
 
-def find_target(aps, ssid=None):
-    """Pick a target AP: exact/substring SSID match if given, else strongest RSSI."""
+def find_target(aps, ssid=None, bssid=None):
+    """Pick a target AP by BSSID (exact), then SSID (exact/substring), else strongest RSSI."""
     if not aps:
+        return None
+    if bssid:
+        want = bssid.lower().replace("-", ":")
+        for a in aps:
+            if a.bssid and a.bssid.lower() == want:
+                return a
         return None
     if ssid:
         want = ssid.lower()

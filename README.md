@@ -57,15 +57,24 @@ wait for markers. Command syntax and the `list -a` format
 | Chain | What one run does end-to-end |
 |---|---|
 | `evil_twin_portal.py` | scan → pick target AP → **clone its SSID** (`evilportal -c setap`) → select it + enable **EPDeauth** (deauth the real AP while the twin runs) → serve your cloned portal → stream captured creds |
+| `target_pmkid.py` | scan → locate ONE AP by **SSID or BSSID** → lock its channel → select it → `sniffpmkid -l -d` → stop on a capture marker or timeout |
 | `handshake_harvester.py` | scan → find active channels → walk each channel running `sniffpmkid -c <ch> -d` for a dwell window → PMKID/EAPOL `.pcap`s land on SD (feed to hcxpcapngtool → hashcat) |
+| `beacon_probe.py` | build the SSID list the mode needs → `beacon-list` / `beacon-random` / `beacon-clone` / `probe` / `rickroll` transmit → timed → `stopscan` |
 | `recon_report.py` | `scanap` + `scansta` → pull the lists back over serial → write `recon_*.csv` + `.json` **on your computer** |
 | `presence_monitor.py` | rescan on an interval → diff vs. last pass → log every AP that **appeared/disappeared** with timestamps |
 
 ```
 python3 chains/recon_report.py --ap-seconds 25 --sta-seconds 30
+python3 chains/target_pmkid.py --target-bssid 50:ff:20:84:d6:0f --capture-seconds 90
 python3 chains/handshake_harvester.py --dwell 45
+python3 chains/beacon_probe.py --mode beacon-list --ssids "FreeWiFi,Guest,Lobby" --duration 60
 python3 chains/presence_monitor.py --interval 60 --events presence.log
 ```
+
+BSSID targeting note: `list -a` doesn't expose BSSIDs, so
+`target_pmkid.py` reads them from the streaming `scanap` output and correlates
+by (SSID, channel). A BSSID that never lands in `list -a` can't be selected —
+fall back to `--target-ssid` or `handshake_harvester.py` for that channel.
 
 ## The evil-twin workflow (clone → deploy → harvest)
 
