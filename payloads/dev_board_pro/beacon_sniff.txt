@@ -1,9 +1,0 @@
-# beacon_sniff -- passively capture 802.11 beacon frames to an SD pcap
-# Target: AWOK Dual Touch V3, orange (CLI) port, esp32_marauder_dev_board_pro.bin, v1.13.0
-# Purpose: passive collection only (no transmit). Writes a .pcap on the SD card.
-# Duration: ~45 s.  SD: required to save the capture.  GPS: not required.
-
-stopscan
-sniffbeacon
-DELAY 45000
-stopscan

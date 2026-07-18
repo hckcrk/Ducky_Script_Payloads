@@ -1,9 +1,0 @@
-# ble_skimmer_detect -- look for known credit-card-skimmer Bluetooth signatures
-# Target: AWOK Dual Touch V3, orange (CLI) port, esp32_marauder_dev_board_pro.bin, v1.13.0
-# `sniffskim` passively flags common skimmer BLE modules (e.g. HC-05 style names).
-# Duration: ~45 s.  SD: optional.  GPS: not required.
-
-stopscan
-sniffskim
-DELAY 45000
-stopscan

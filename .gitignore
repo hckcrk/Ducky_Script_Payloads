@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+
+# host-side outputs from the chains
+recon_*.csv
+recon_*.json
+presence*.log
+index.html
