@@ -1,0 +1,14 @@
+REM Title:  Local host/network recon (macOS) -- LOCAL ONLY, no exfiltration
+REM Class:  host reconnaissance via built-in tools
+REM Effect: writes system/network inventory to ~/Desktop and opens it.
+REM Use:    authorized testing only.
+DEFAULT_DELAY 40
+DELAY 1000
+GUI SPACE
+DELAY 700
+STRING Terminal
+DELAY 700
+ENTER
+DELAY 1800
+STRING R=~/Desktop/recon_$(hostname -s).txt; { echo "== OS =="; sw_vers; echo "== HARDWARE/NETWORK =="; system_profiler SPHardwareDataType SPNetworkDataType; echo "== IFCONFIG =="; ifconfig; echo "== PREFERRED WIFI =="; networksetup -listpreferredwirelessnetworks en0 2>/dev/null; echo "== APPS =="; ls /Applications; } > "$R" 2>&1; open "$R"
+ENTER

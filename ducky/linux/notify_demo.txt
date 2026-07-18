@@ -1,0 +1,10 @@
+REM Title:  HID + notify-send demo (Linux)
+REM Class:  HID injection / living-off-the-land. Benign.
+REM Effect: shows a desktop notification. Nothing is saved or sent.
+REM Use:    authorized training / awareness demos only.
+DEFAULT_DELAY 40
+DELAY 1000
+CTRL ALT t
+DELAY 1500
+STRING notify-send "Security Awareness Test" "A USB device ran this. Do not trust unknown USB devices." 2>/dev/null; echo "notification sent"
+ENTER

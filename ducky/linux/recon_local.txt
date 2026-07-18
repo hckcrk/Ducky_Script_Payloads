@@ -1,0 +1,10 @@
+REM Title:  Local host/network recon (Linux) -- LOCAL ONLY, no exfiltration
+REM Class:  host reconnaissance via built-in tools
+REM Effect: writes system/network inventory to ~/recon_<host>.txt and opens it.
+REM Use:    authorized testing only.
+DEFAULT_DELAY 40
+DELAY 1000
+CTRL ALT t
+DELAY 1500
+STRING R=~/recon_$(hostname).txt; { echo "== OS =="; uname -a; (lsb_release -a 2>/dev/null || cat /etc/os-release); echo "== IP =="; ip a; echo "== WIFI =="; nmcli -t dev wifi 2>/dev/null; nmcli connection show 2>/dev/null; echo "== LISTENING =="; ss -tlnp 2>/dev/null; echo "== LOGGED IN =="; who; } > "$R" 2>&1; (xdg-open "$R" 2>/dev/null || cat "$R")
+ENTER

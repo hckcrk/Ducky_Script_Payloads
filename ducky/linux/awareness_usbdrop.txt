@@ -1,0 +1,11 @@
+REM Title:  USB-drop security awareness demo (Linux / GNOME)
+REM Class:  HID keystroke injection / security awareness
+REM Effect: opens a terminal and prints an awareness message. Benign, local only.
+REM Note:   CTRL+ALT+T opens a terminal on many desktops; adjust for yours.
+REM Use:    authorized training / awareness demos only.
+DEFAULT_DELAY 40
+DELAY 1000
+CTRL ALT t
+DELAY 1500
+STRING clear; printf '\n  SECURITY AWARENESS TEST\n  A USB device just typed this in seconds.\n  A real attacker could have run commands as you.\n  Never plug in untrusted USB devices. Lock your screen when away.\n\n'
+ENTER

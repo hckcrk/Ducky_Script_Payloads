@@ -1,0 +1,13 @@
+REM Title:  Clipboard snapshot (Windows) -- LOCAL ONLY
+REM Class:  data-at-rest access / pastejacking awareness
+REM Effect: saves the current clipboard text to a Desktop file. No exfiltration.
+REM Use:    authorized testing / awareness demos only.
+DEFAULT_DELAY 40
+DELAY 1000
+GUI r
+DELAY 800
+STRING powershell -NoProfile
+ENTER
+DELAY 1600
+STRING Get-Clipboard | Out-File "$env:USERPROFILE\Desktop\clipboard_$($env:COMPUTERNAME).txt"; notepad "$env:USERPROFILE\Desktop\clipboard_$($env:COMPUTERNAME).txt"
+ENTER

@@ -1,0 +1,14 @@
+REM Title:  Clipboard snapshot (macOS) -- LOCAL ONLY
+REM Class:  data-at-rest access / pastejacking awareness
+REM Effect: saves current clipboard text to ~/Desktop. No exfiltration.
+REM Use:    authorized testing / awareness demos only.
+DEFAULT_DELAY 40
+DELAY 1000
+GUI SPACE
+DELAY 700
+STRING Terminal
+DELAY 700
+ENTER
+DELAY 1800
+STRING F=~/Desktop/clipboard_$(hostname -s).txt; pbpaste > "$F"; open "$F"
+ENTER

