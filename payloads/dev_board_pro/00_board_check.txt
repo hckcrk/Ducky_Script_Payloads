@@ -1,0 +1,10 @@
+# 00_board_check -- sanity-check the serial link to the CLI ESP32
+# Target: AWOK Dual Touch V3, orange (CLI) port, esp32_marauder_dev_board_pro.bin, Marauder v1.13.0
+# Purpose: confirm the board answers on the CLI. `help` dumps the command list;
+#          `channel` prints the current channel. If you see output, you're wired up.
+# Duration: ~3 s.  SD: not required.  GPS: not required.
+
+stopscan
+help
+DELAY 1500
+channel

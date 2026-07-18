@@ -1,0 +1,10 @@
+# 00_board_check -- sanity-check the serial link
+# Target: Marauder v6 / v6.1 (ESP32-WROOM, touch + microSD + Bluetooth), esp32_marauder_v6_1.bin, v1.13.0
+# Connect the board's USB port to the host; this drives the Marauder CLI over serial.
+# Purpose: `help` dumps the command list; `channel` prints the current channel.
+# Duration: ~3 s.  SD: not required.  GPS: not required.
+
+stopscan
+help
+DELAY 1500
+channel

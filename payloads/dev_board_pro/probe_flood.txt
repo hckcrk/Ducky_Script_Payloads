@@ -1,0 +1,13 @@
+# probe_flood -- flood probe-request frames using an SSID list
+# Target: AWOK Dual Touch V3, orange (CLI) port, esp32_marauder_dev_board_pro.bin, v1.13.0
+# Flow: build an SSID list (20 random names) -> attack -t probe
+# Duration: ~35 s.  SD: not required.  GPS: not required.
+# ACTIVE TRANSMISSION -- authorized testing only.
+
+stopscan
+clearlist -s
+ssid -a -g 20
+list -s
+attack -t probe
+DELAY 30000
+stopscan

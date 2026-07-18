@@ -1,0 +1,12 @@
+# recon_scan_aps -- discover nearby WiFi access points, list them, save to SD
+# Target: Marauder v6 / v6.1 (ESP32-WROOM + microSD), esp32_marauder_v6_1.bin, v1.13.0
+# Flow: clear old APs -> scan ~25 s -> stop -> print list -> save AP list to SD card
+# Duration: ~30 s.  SD: required for `save`.  GPS: not required.
+
+stopscan
+clearlist -a
+scanap
+DELAY 25000
+stopscan
+list -a
+save -a

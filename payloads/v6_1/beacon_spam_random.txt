@@ -1,0 +1,10 @@
+# beacon_spam_random -- flood random/garbage SSID beacons
+# Target: Marauder v6 / v6.1 (ESP32-WROOM), esp32_marauder_v6_1.bin, v1.13.0
+# `attack -t beacon -r` generates random SSID names on the fly (no list needed).
+# Duration: ~35 s.  SD: not required.  GPS: not required.
+# ACTIVE TRANSMISSION -- authorized testing only.
+
+stopscan
+attack -t beacon -r
+DELAY 30000
+stopscan

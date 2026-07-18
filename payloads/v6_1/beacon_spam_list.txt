@@ -1,0 +1,16 @@
+# beacon_spam_list -- broadcast a custom list of fake SSIDs (beacon flood)
+# Target: Marauder v6 / v6.1 (ESP32-WROOM), esp32_marauder_v6_1.bin, v1.13.0
+# Flow: clear SSID list -> add named SSIDs -> attack -t beacon -l (spam from the SSID list)
+# EDIT: change/extend the `ssid -a -n <name>` lines to the names you want.
+# Duration: ~35 s.  SD: not required.  GPS: not required.
+# ACTIVE TRANSMISSION -- authorized testing only.
+
+stopscan
+clearlist -s
+ssid -a -n FreeWiFi
+ssid -a -n Guest_Network
+ssid -a -n xfinitywifi
+list -s
+attack -t beacon -l
+DELAY 30000
+stopscan

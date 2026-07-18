@@ -1,0 +1,9 @@
+# ble_sniff_airtag -- scan for Apple AirTag / Find My BLE advertisements
+# Target: AWOK Dual Touch V3, orange (CLI) port, esp32_marauder_dev_board_pro.bin, v1.13.0
+# Passive BLE scan (ESP32-WROOM has Bluetooth). Prints detected AirTags.
+# Duration: ~45 s.  SD: optional (for logging).  GPS: not required.
+
+stopscan
+sniffbt -t airtag
+DELAY 45000
+stopscan

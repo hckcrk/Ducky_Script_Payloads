@@ -1,0 +1,10 @@
+# rickroll_beacon -- broadcast the classic Rick Astley lyric SSIDs as beacons
+# Target: Marauder v6 / v6.1 (ESP32-WROOM), esp32_marauder_v6_1.bin, v1.13.0
+# `attack -t rickroll` beacons a fixed set of "Never gonna..." SSIDs. Harmless demo.
+# Duration: ~35 s.  SD: not required.  GPS: not required.
+# ACTIVE TRANSMISSION -- authorized testing only.
+
+stopscan
+attack -t rickroll
+DELAY 30000
+stopscan

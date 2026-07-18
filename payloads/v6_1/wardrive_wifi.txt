@@ -1,0 +1,10 @@
+# wardrive_wifi -- WiFi wardrive, logging APs (with GPS coords) to the SD card
+# Target: Marauder v6 / v6.1 (ESP32-WROOM + microSD), esp32_marauder_v6_1.bin, v1.13.0
+# Writes a wardrive CSV to SD. Coordinates are recorded when the v6's GPS module has a fix;
+# without a fix it still logs, but with no coords.
+# Duration: ~2 min (raise DELAY for longer drives).  SD: required.  GPS: for coords.
+
+stopscan
+wardrive
+DELAY 120000
+stopscan
