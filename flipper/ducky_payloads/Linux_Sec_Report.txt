@@ -1,0 +1,11 @@
+REM Title:  Security posture read-out (Linux) -- READ ONLY (no sudo)
+REM Class:  defensive posture assessment (changes NOTHING)
+REM Effect: writes SELinux/AppArmor/firewall/update/login status to ~/posture_<host>.txt.
+REM         Read-only; does not modify any control.
+REM Use:    authorized testing / blue-team baseline.
+DEFAULT_DELAY 40
+DELAY 1000
+CTRL ALT t
+DELAY 1500
+STRING R=~/posture_$(hostname).txt; { echo "== SELINUX =="; getenforce 2>/dev/null || echo n/a; echo "== APPARMOR =="; aa-status 2>/dev/null | head || echo n/a; echo "== FIREWALL =="; (ufw status 2>/dev/null || echo "needs sudo/n/a"); echo "== AUTO-UPDATES =="; systemctl is-enabled unattended-upgrades 2>/dev/null || echo n/a; echo "== RECENT LOGINS =="; last -n 15 2>/dev/null; } > "$R" 2>&1; (xdg-open "$R" 2>/dev/null || cat "$R")
+ENTER
