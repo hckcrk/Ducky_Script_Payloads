@@ -1,0 +1,23 @@
+REM Title:  USB-drop security awareness demo (macOS)
+REM Class:  HID keystroke injection / security awareness
+REM Effect: opens TextEdit and types an awareness message. Benign, local only.
+REM Note:   GUI = Command key on macOS. GUI+SPACE opens Spotlight.
+REM Use:    authorized training / awareness demos only.
+DEFAULT_DELAY 40
+DELAY 1000
+GUI SPACE
+DELAY 700
+STRING TextEdit
+DELAY 700
+ENTER
+DELAY 1800
+GUI n
+DELAY 900
+STRINGLN SECURITY AWARENESS TEST
+STRINGLN ---------------------------------
+STRINGLN This document was typed by a USB device in seconds.
+STRINGLN A real attacker could have run commands as you.
+STRINGLN
+STRINGLN - Never plug in untrusted USB devices.
+STRINGLN - Lock your Mac when you step away (CTRL+CMD+Q).
+STRINGLN - Report unknown USB devices to your security team.

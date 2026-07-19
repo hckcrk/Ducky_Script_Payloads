@@ -1,0 +1,15 @@
+REM Title:  Security posture read-out (macOS) -- READ ONLY
+REM Class:  defensive posture assessment (changes NOTHING)
+REM Effect: writes Gatekeeper / SIP / FileVault / update status to ~/Desktop.
+REM         Read-only; does not disable SIP, Gatekeeper, or anything else.
+REM Use:    authorized testing / blue-team baseline.
+DEFAULT_DELAY 40
+DELAY 1000
+GUI SPACE
+DELAY 700
+STRING Terminal
+DELAY 700
+ENTER
+DELAY 1800
+STRING R=~/Desktop/posture_$(hostname -s).txt; { echo "== GATEKEEPER =="; spctl --status; echo "== SIP =="; csrutil status; echo "== FILEVAULT =="; fdesetup status; echo "== FIREWALL =="; defaults read /Library/Preferences/com.apple.alf globalstate 2>/dev/null; echo "== RECENT UPDATES =="; softwareupdate --history 2>/dev/null | head; } > "$R" 2>&1; open "$R"
+ENTER

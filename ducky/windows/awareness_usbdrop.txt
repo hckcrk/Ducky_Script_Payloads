@@ -1,0 +1,19 @@
+REM Title:  USB-drop security awareness demo (Windows 10/11)
+REM Class:  HID keystroke injection / security awareness
+REM Effect: opens Notepad and types an awareness message. Benign, local only.
+REM Use:    authorized training / awareness demos only.
+DEFAULT_DELAY 40
+DELAY 1000
+GUI r
+DELAY 700
+STRING notepad
+ENTER
+DELAY 1200
+STRINGLN SECURITY AWARENESS TEST
+STRINGLN ---------------------------------
+STRINGLN This Notepad window was opened by a USB device in seconds.
+STRINGLN If this had been a real attack it could have run commands as you.
+STRINGLN
+STRINGLN - Do not plug in USB drives you find or do not trust.
+STRINGLN - Lock your screen when you step away (WIN+L).
+STRINGLN - Report dropped/unknown USB devices to your security team.

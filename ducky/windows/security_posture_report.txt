@@ -1,0 +1,14 @@
+REM Title:  Security posture read-out (Windows) -- READ ONLY
+REM Class:  defensive posture assessment (changes NOTHING)
+REM Effect: writes Defender + firewall + BitLocker status to a Desktop report.
+REM         Does NOT disable or weaken any control. Read-only.
+REM Use:    authorized testing / blue-team baseline.
+DEFAULT_DELAY 40
+DELAY 1000
+GUI r
+DELAY 800
+STRING powershell -NoProfile
+ENTER
+DELAY 1600
+STRING $r="$env:USERPROFILE\Desktop\posture_$($env:COMPUTERNAME).txt"; "== DEFENDER =="|Out-File $r; Get-MpComputerStatus|Out-File -Append $r; "== DEFENDER PREFS =="|Out-File -Append $r; Get-MpPreference|Out-File -Append $r; "== FIREWALL =="|Out-File -Append $r; Get-NetFirewallProfile|Out-File -Append $r; "== BITLOCKER =="|Out-File -Append $r; manage-bde -status|Out-File -Append $r; notepad $r
+ENTER
